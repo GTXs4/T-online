@@ -23,10 +23,11 @@
             <div>
                 <div class="price">
                     <div>
-                        <h1 class="title">Bsale Test</h1>
+                        <a class="without" href="{% url 'home' %}"><h1 class="title">Bsale Test</h1></a>
                     </div>
                     <div class="container" style="align-items: center;">
-                        <a class="icon-header" href="#"><i class="fa fa-search"></i></a>
+                        <input type="text" id="searchText" maxlength="30" minlength="4" placeholder="Minimo palabra de 3 letras" required>
+                        <button id="searchBtn" class="icon-header"><i class="fa fa-search"></i></button>
                         <a class="icon-header" href="#"><i class="fa fa-shopping-basket"></i></a>
                     </div>
                 </div>
@@ -37,6 +38,17 @@
         {% block content %}{% endblock %}
 
     </body>
+    <script>
+        let searchBtn = document.getElementById("searchBtn");
+
+        searchBtn.addEventListener("click", function(){
+            let searchText = encodeURIComponent(document.getElementById("searchText").value.trim());
+            if (searchText.length >= 3 && searchText.length <= 30){
+                const url = "{% url 'search' %}" + "?text=" + searchText;
+                location.replace(url);
+            }
+        })
+    </script>
     
     
 </html>

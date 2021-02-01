@@ -59,6 +59,25 @@ button{
 body{
     margin: 0%;
 }
+a.without{
+    color:white;
+    text-decoration: none;
+}
+
+#searchText{
+    border-radius: 5px;
+    padding: 12px 12px;
+    margin: 8px 0;
+    
+}
+
+#searchBtn{
+    font-size:30px;
+}
+
+#searchBtn:hover,#searchBtn:active,#searchBtn:focus {
+    outline: none;
+}
 
 /* Media Query */
 @media screen and (max-width: 1230px){
