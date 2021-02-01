@@ -1,0 +1,12 @@
+{% extends "tienda/base.html" %}
+
+{% load static %}
+
+{% block content %}
+    {% if product_list %}
+        {% for product in product_list %}
+            <p>{{product.name}}</p>
+            <img src="{{product.url_image}}" alt="">
+        {% endfor %}
+    {% endif %}
+{% endblock %}
