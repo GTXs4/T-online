@@ -1,0 +1,81 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.element{
+    border-radius:10px;
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+    padding: 10px;
+    margin: 10px;
+    width: calc(100%/6 - 40px);
+    text-align: center;
+}
+
+.price{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.element-pagination{
+    margin: 10px;
+    font-size: 40px;
+    
+}
+.element-pagination a{
+    color: black;
+}
+.icon-header{
+    color: white;
+    padding-left: 5px;
+    padding-right: 10px;
+}
+
+button{
+  background-color: #ED553B;
+  color: white;
+  border: none;
+  border-radius:10px;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 20px 10px;
+  cursor: pointer;
+}
+
+.header{
+  text-align: center;
+  color: white;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.header h1{
+    padding-left: 10px;
+}
+
+body{
+    margin: 0%;
+}
+
+/* Media Query */
+@media screen and (max-width: 1230px){
+    .element{        
+        width: calc(100%/3 - 40px);
+    }
+}
+@media screen and (max-width: 730px){
+    .element{        
+        width: calc(100%/2 - 40px);
+    }
+    .title{
+        font-size: 1.2em;
+    }
+}
+
+/* Typografia */
+body,h1,h2,h3,h4,h5,a,button,p {
+    font-family: 'Anton', sans-serif;
+  }

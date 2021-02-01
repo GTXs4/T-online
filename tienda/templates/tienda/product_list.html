@@ -3,10 +3,34 @@
 {% load static %}
 
 {% block content %}
+    <!-- Productos -->
     {% if product_list %}
+        <div class="container">
         {% for product in product_list %}
-            <p>{{product.name}}</p>
-            <img src="{{product.url_image}}" alt="">
+            <div class="element">
+                <div class="price">
+                    <p style="font-size: 25px;">${{product.price}}</p>
+                    <button><i class="fa fa-shopping-basket"></i></button>                
+                </div>
+                <p style="font-size: 18px;">{{product.name}}</p>
+                <img src="{{product.url_image}}" alt="" style="width:100%">
+            </div>
         {% endfor %}
+        </div>
     {% endif %}
+    <!-- Paginacion -->
+    <div class="container">
+    {% if is_paginated %}
+        <div class="element-pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-hand-o-left"></i></a>
+        {% endif %}
+        </div>
+        <div class="element-pagination">
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-hand-o-right"></i></a>
+        {% endif %}
+        </div>
+    {% endif %}
+    </div>
 {% endblock %}
