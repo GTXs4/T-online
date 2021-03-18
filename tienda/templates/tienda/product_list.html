@@ -1,6 +1,7 @@
 {% extends "tienda/base.html" %}
 
 {% load static %}
+{% load humanize %}
 
 {% block content %}
     <!-- Productos -->
@@ -9,7 +10,7 @@
         {% for product in product_list %}
             <div class="element">
                 <div class="price">
-                    <p style="font-size: 25px;">${{product.price}}</p>
+                    <p style="font-size: 25px;">${{product.price|floatformat|intcomma}}</p>
                     <button><i class="fa fa-shopping-basket"></i></button>                
                 </div>
                 <p style="font-size: 18px;">{{product.name}}</p>
