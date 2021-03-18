@@ -5,9 +5,9 @@
 
 {% block content %}
     <!-- Productos -->
-    {% if products %}
+    {% if page.object_list %}
         <div class="container">
-        {% for product in products %}
+        {% for product in page.object_list %}
             <div class="element">
                 <div class="price">
                     <p style="font-size: 25px;">${{product.price|floatformat|intcomma}}</p>
@@ -27,5 +27,18 @@
         <h1>No se encontraron coincidencias</h1>
     </div>    
     {% endif %}
+    <!-- Paginacion -->
+    <div class="container">
+        <div class="element-pagination">
+        {% if page.has_previous %}
+            <a href="?text={{text}}&page={{ page.previous_page_number }}"><i class="fa fa-hand-o-left"></i></a>
+        {% endif %}
+        </div>
+        <div class="element-pagination">
+        {% if page.has_next %}
+            <a href="?text={{text}}&page={{ page.next_page_number }}"><i class="fa fa-hand-o-right"></i></a>
+        {% endif %}
+        </div>
+    </div>
     
 {% endblock %}
