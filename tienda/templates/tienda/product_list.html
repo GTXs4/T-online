@@ -14,7 +14,11 @@
                     <button><i class="fa fa-shopping-basket"></i></button>                
                 </div>
                 <p style="font-size: 18px;">{{product.name}}</p>
-                <img src="{{product.url_image}}" alt="" style="width:100%">
+                {% if product.url_image %}
+                    <img src="{{product.url_image}}" alt="" style="width:100%">
+                {% else %}
+                    <img src="{% static 'tienda/img/photo_640.png' %}" alt="" style="width:100%">
+                {% endif %}
             </div>
         {% endfor %}
         </div>
