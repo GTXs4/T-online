@@ -1,4 +1,4 @@
-// Load the elements in the page
+// Carga los elementos en la pagina
 function loadElements(url, defaultImage) {
     let container = document.getElementById('main-container');
     // Limpiara el container
@@ -51,13 +51,13 @@ function loadElements(url, defaultImage) {
         } 
     })
 }
-// Clean the div container
+// Limpia el div container
 function cleanContainer(div_container){
     while (div_container.hasChildNodes()){
         div_container.removeChild(div_container.firstChild)
     }
 }
-// Load the products in the div products-container
+// Carga los productos en el div products-container
 function fillProducts(products, defaultImage){
     for (let i = 0; i < products.length; i++) {
 

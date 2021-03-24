@@ -29,6 +29,28 @@
                         <input type="text" id="searchText" maxlength="30" minlength="4" placeholder="Minimo palabra de 3 letras" required>
                         <button id="searchBtn" class="icon-header"><i class="fa fa-search"></i></button>
                         <a class="icon-header" href="#"><i class="fa fa-shopping-basket"></i></a>
+                    </div>                    
+                </div>
+                <div class="price" style="padding-bottom: 30px;">
+                    <!-- Contenedor Ordenar -->
+                    <div class="container" style="align-items: center;padding-left: 10px;">
+                        <label for="id_ordering" style="margin-right: 15px;">Ordenar</label>
+                        <select name="ordering" id="id_ordering" onChange="orderProducts(this);" style="padding: 8px 8px;border-radius: 5px;">                        
+                            <option value="category">Categoria Ascendente</option>
+                            <option value="-category">Categoria Descendente</option>
+                            <option value="name">A-Z</option>
+                            <option value="-name">Z-A</option>
+                            <option value="price">Menor precio</option>
+                            <option value="-price">Mayor precio</option>
+                        </select>
+                    </div>
+                    <!-- Contenedor Filtrar -->
+                    <div class="container" style="align-items: center;padding-right: 10px;">
+                        <label for="id_category" style="margin-right: 15px;">Filtrar Categoria</label>
+                        <select name="category" id="id_category" onChange="filterProducts(this);" style="padding: 8px 8px;border-radius: 5px;">
+                            <option value="">----</option>
+                            {% block option_category %}{% endblock %}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -42,16 +64,46 @@
 
     </body>
     <script>
+        // Busqueda
         let searchBtn = document.getElementById("searchBtn");
 
-        searchBtn.addEventListener("click", function(){
+        searchBtn.addEventListener("click", function(){                        
+            document.getElementById("id_category").selectedIndex = 0;
+            let selOrder = document.getElementById("id_ordering");
             let searchText = encodeURIComponent(document.getElementById("searchText").value.trim());
             if (searchText.length >= 3 && searchText.length <= 30){
-                const url = "{% url 'home' %}" + 'api/v1/products/' + '?search=' + searchText;
+                const url = "{% url 'home' %}" + 'api/v1/products/' +
+                '?ordering=' + selOrder.value + '&search=' + searchText;
                 const default_image = "{% static 'tienda/img/photo_640.png' %}";
                 loadElements(url, default_image);
             }
         })
+
+        // Funcion para Ordenar
+        function orderProducts(selOrder) {
+            let selCategory = document.getElementById("id_category");
+            let searchText = encodeURIComponent(document.getElementById("searchText").value.trim());
+            let queryParameters = '';
+            if (searchText !== '') {
+                queryParameters = '?ordering=' + selOrder.value + '&search=' + searchText;
+            } else {
+                queryParameters = '?category=' + selCategory.value + '&ordering=' + selOrder.value;
+            }
+            const url = "{% url 'home' %}" + 'api/v1/products/' + queryParameters;
+            const default_image = "{% static 'tienda/img/photo_640.png' %}";
+            loadElements(url, default_image);
+        }
+
+        // Funcion para Filtrar Categorias
+        function filterProducts(selCategory) {
+            document.getElementById("searchText").value = '';
+            let selOrder = document.getElementById("id_ordering");
+            const url = "{% url 'home' %}" + 'api/v1/products/' +
+            '?category=' + selCategory.value +
+            '&ordering=' + selOrder.value;
+            const default_image = "{% static 'tienda/img/photo_640.png' %}";
+            loadElements(url, default_image);
+        }
     </script>
     
     

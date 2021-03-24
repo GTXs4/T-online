@@ -1,7 +1,12 @@
 {% extends "tienda/base.html" %}
 
 {% load static %}
-{% load humanize %}
+
+{% block option_category %}
+    {% for category in categories %}
+        <option value="{{category.id}}">{{category.capitalized_name}}</option>
+    {% endfor %}
+{% endblock %} 
 
 {% block content %}
     <!-- Carga el contenido inicial de la pagina --> 
