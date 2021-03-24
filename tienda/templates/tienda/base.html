@@ -64,6 +64,7 @@
 
     </body>
     <script>
+        const baseUrl = "{% url 'home' %}" + 'api/v1/products/';
         // Busqueda
         let searchBtn = document.getElementById("searchBtn");
 
@@ -72,9 +73,7 @@
             let selOrder = document.getElementById("id_ordering");
             let searchText = encodeURIComponent(document.getElementById("searchText").value.trim());
             if (searchText.length >= 3 && searchText.length <= 30){
-                const url = "{% url 'home' %}" + 'api/v1/products/' +
-                '?ordering=' + selOrder.value + '&search=' + searchText;
-                const default_image = "{% static 'tienda/img/photo_640.png' %}";
+                const url =  baseUrl + '?ordering=' + selOrder.value + '&search=' + searchText;                
                 loadElements(url, default_image);
             }
         })
@@ -89,8 +88,7 @@
             } else {
                 queryParameters = '?category=' + selCategory.value + '&ordering=' + selOrder.value;
             }
-            const url = "{% url 'home' %}" + 'api/v1/products/' + queryParameters;
-            const default_image = "{% static 'tienda/img/photo_640.png' %}";
+            const url = baseUrl + queryParameters;
             loadElements(url, default_image);
         }
 
@@ -98,10 +96,7 @@
         function filterProducts(selCategory) {
             document.getElementById("searchText").value = '';
             let selOrder = document.getElementById("id_ordering");
-            const url = "{% url 'home' %}" + 'api/v1/products/' +
-            '?category=' + selCategory.value +
-            '&ordering=' + selOrder.value;
-            const default_image = "{% static 'tienda/img/photo_640.png' %}";
+            const url = baseUrl + '?category=' + selCategory.value + '&ordering=' + selOrder.value;
             loadElements(url, default_image);
         }
     </script>
