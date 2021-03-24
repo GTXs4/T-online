@@ -35,9 +35,10 @@
         </header>
         
         <!-- Contenido -->
-        <div id="container-products">
+        <script src="{% static 'tienda/js/loadPage.js' %}"></script>
+        <div id="main-container"></div>        
         {% block content %}{% endblock %}
-        </div>
+        
 
     </body>
     <script>
@@ -46,54 +47,9 @@
         searchBtn.addEventListener("click", function(){
             let searchText = encodeURIComponent(document.getElementById("searchText").value.trim());
             if (searchText.length >= 3 && searchText.length <= 30){
-                const url = "{% url 'search_asyn' %}" + "?text=" + searchText;
-                fetch(url).then(response => response.json()).then(function(data){
-                    
-                    var container = document.getElementById('container-products');
-                    // Limpia el div container-products
-                    while (container.hasChildNodes()){
-                        container.removeChild(container.firstChild)
-                    }
-
-                    let div_cont = document.createElement('div');
-                    div_cont.classList.add('container'); 
-                    
-                    data['page_products'].forEach(fillProducts);
-
-                    
-                    container.appendChild(div_cont);
-                    
-
-                    function fillProducts(product){ 
-
-                        let div_element = document.createElement('div');
-                        div_element.classList.add('element');                       
-
-                        let div_price = document.createElement('div');
-                        div_price.classList.add('price');
-
-                        div_price.innerHTML = 
-                            "<p style='font-size: 25px;'>" + product['price'] + "</p>" + 
-                            "<button><i class='fa fa-shopping-basket'></i></button>";
-                        
-                        let subdiv = document.createElement('div');
-
-                        let defaul_image = "{% static 'tienda/img/photo_640.png' %}";
-                        if (product['url'] !== null){
-                            defaul_image = decodeURIComponent(product['url'])
-                        }
-
-                        subdiv.innerHTML = 
-                            "<p style='font-size: 18px;'>" + product['name'] + "</p>" +
-                            "<img src='" + defaul_image + "' alt='' style='width:100%'>"
-                        
-                        div_element.appendChild(div_price);
-                        div_element.appendChild(subdiv);
-                        div_cont.appendChild(div_element);                                                
-                    }
-
-                })
-                
+                const url = "{% url 'home' %}" + 'api/v1/products/' + '?search=' + searchText;
+                const default_image = "{% static 'tienda/img/photo_640.png' %}";
+                loadElements(url, default_image);
             }
         })
     </script>

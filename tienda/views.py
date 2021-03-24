@@ -1,14 +1,9 @@
 from django.views.generic.base import TemplateView
-from django.views.generic.list import ListView
 from .models import Product
 from .serializers import ProductSerializer
 from rest_framework import viewsets, filters
 from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
-
-from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
-from django.http import JsonResponse
 
 # Create your views here.
 class Home(TemplateView):

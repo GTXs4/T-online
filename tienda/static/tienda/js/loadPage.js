@@ -1,12 +1,17 @@
 // Load the elements in the page
 function loadElements(url, defaultImage) {
-    fetch(url).then(response => response.json()).then(function(data){
+    let container = document.getElementById('main-container');
+    // Limpiara el container
+    cleanContainer(container);
+    // Agregamos un loader mientras carga
+    let div_loader = document.createElement('div');
+    div_loader.innerHTML= '<div class="loader"></div>';
+    container.appendChild(div_loader);
+    
+    fetch(url).then(response => response.json()).then(function(data){        
         
-        let container = document.getElementById('main-container');
-        // Limpia el div main-container
-        while (container.hasChildNodes()){
-            container.removeChild(container.firstChild)
-        }
+        // Limpiara del container el loader
+        cleanContainer(container);
         // Preparamos los div contenedores
         let div_products = document.createElement('div');
         let div_pagination = document.createElement('div');
@@ -45,6 +50,12 @@ function loadElements(url, defaultImage) {
                 '</div>';  
         } 
     })
+}
+// Clean the div container
+function cleanContainer(div_container){
+    while (div_container.hasChildNodes()){
+        div_container.removeChild(div_container.firstChild)
+    }
 }
 // Load the products in the div products-container
 function fillProducts(products, defaultImage){
