@@ -1,0 +1,17 @@
+{% extends "tienda/base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+    <!-- Contenido -->    
+    <div id="main-container"></div>
+
+    <script src="{% static 'tienda/js/loadPage.js' %}"></script>  
+
+    <script>
+        const url = "{% url 'home' %}" + 'api/v1/products/';
+        const default_image = "{% static 'tienda/img/photo_640.png' %}";
+        loadElements(url, default_image);
+    </script>
+{% endblock %}
